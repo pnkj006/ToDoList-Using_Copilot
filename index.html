@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#223b33">
+  <meta name="description" content="A block-built daily quest board for planning tasks and tracking your progress.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%2339734d' stroke='%231e3d2c' stroke-width='3' d='M3 3h26v26H3z'/%3E%3Cpath fill='%23d8e36b' d='M7 7h18v6H7z'/%3E%3Cpath fill='%23fffdf2' d='M9 16h4v4H9zm10 0h4v4h-4zM12 22h8v3h-8z'/%3E%3C/svg%3E">
+  <title>Blockday | Your daily quest board</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">B</span><span>BLOCKDAY</span></div>
+    <time class="top-date" id="todayLabel"></time>
+  </header>
+  <main>
+    <section class="world-banner" aria-label="Daily quest board">
+      <span class="sun" aria-hidden="true"></span><span class="cloud" aria-hidden="true"></span><span class="hill" aria-hidden="true"></span>
+      <div class="banner-copy">
+        <p class="eyebrow">Your world, one block at a time</p>
+        <h1>Build a good day.</h1>
+        <p>Every task finished is another block placed.</p>
+      </div>
+      <span class="banner-block" aria-hidden="true"></span>
+    </section>
+
+    <div class="dashboard">
+      <section aria-labelledby="tasksHeading">
+        <div class="section-heading">
+          <div><h2 id="tasksHeading">Today's quests</h2><p>Pick a task. Make some progress.</p></div>
+          <span class="count" id="taskCount">0 QUESTS</span>
+        </div>
+        <form class="composer panel" id="taskForm">
+          <div class="input-row">
+            <input class="task-input" id="taskInput" type="text" maxlength="120" placeholder="What do you want to get done?" aria-label="New task" required>
+            <button class="primary-button" type="submit">+ Add quest</button>
+          </div>
+          <div class="compose-options">
+            <select id="priorityInput" aria-label="Task priority">
+              <option value="medium">Normal priority</option><option value="high">High priority</option><option value="low">Low priority</option>
+            </select>
+            <label class="date-input-label" for="dueInput">Due date</label>
+            <input class="date-input" id="dueInput" type="date" aria-label="New task due date">
+          </div>
+        </form>
+
+        <div class="task-toolbar">
+          <div class="filters" role="group" aria-label="Filter tasks">
+            <button class="filter-button" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-button" data-filter="active" aria-pressed="false">Active</button>
+            <button class="filter-button" data-filter="completed" aria-pressed="false">Done</button>
+          </div>
+          <input class="search" id="searchInput" type="search" placeholder="Find a quest..." aria-label="Search tasks">
+        </div>
+        <div class="task-list" id="taskList" aria-live="polite"></div>
+      </section>
+
+      <aside class="sidebar" aria-label="Progress">
+        <section class="streak-panel">
+          <div class="side-label">Daily streak</div>
+          <div class="streak-number"><strong id="streakNumber">0</strong><span>days</span></div>
+          <p class="streak-note" id="streakNote">Complete a quest to start your streak.</p>
+          <div class="best-streak"><span>Best streak</span><strong id="bestStreak">0 days</strong></div>
+        </section>
+        <section class="progress-panel panel">
+          <h2 class="side-title">Today's progress</h2>
+          <div class="progress-top"><span id="progressLabel">Quests completed</span><span id="progressCount">0 / 0</span></div>
+          <div class="progress-track" role="progressbar" aria-label="Today's quest completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+          <p class="progress-caption" id="progressCaption">Add a quest and get rolling.</p>
+        </section>
+        <section class="quest-panel panel">
+          <h2 class="side-title">Daily challenge</h2>
+          <div class="quest-row"><span class="quest-icon" aria-hidden="true">01</span><span>Finish one quest today to keep your streak alive.</span></div>
+        </section>
+        <section class="reminder-settings panel" aria-labelledby="reminderHeading">
+          <div>
+            <h2 class="side-title" id="reminderHeading">Due reminders</h2>
+            <p class="reminder-description">Get a reminder when an active quest is due today.</p>
+          </div>
+          <button class="reminder-toggle" id="reminderToggle" type="button" aria-pressed="false">Enable reminders</button>
+        </section>
+        <p class="storage-note">AUTOSAVED ON THIS DEVICE · WORKS OFFLINE</p>
+      </aside>
+    </div>
+    <section class="reminder-panel panel" id="reminderPanel" aria-live="polite" aria-labelledby="reminderNoticeHeading" hidden>
+      <h2 class="side-title" id="reminderNoticeHeading">Due today</h2>
+      <ul class="reminder-list" id="reminderList"></ul>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="backend.js"></script>
+  <script src="frontend.js" defer></script>
+</body>
+</html>
