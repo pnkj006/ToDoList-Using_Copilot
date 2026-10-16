@@ -2,6 +2,8 @@
 
 Blockday is a small, responsive to-do list with a block-style, Minecraft-inspired look. It helps you plan everyday tasks, track completed work, and keep your progress saved in your browser.
 
+**🚀 Try it yourself:** [Create your own To-Do List](https://blockday-todo.onrender.com/)
+
 ## Features
 
 - Add tasks with normal, high, or low priority.
